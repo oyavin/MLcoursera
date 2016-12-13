@@ -19,14 +19,22 @@ grad = zeros(size(theta));
 %               You should set J to the cost and grad to the gradient.
 %
 
+% calculate the squared difference between h(x) and y
+h=X*theta;
+sqDiff=sum((h-y).^2);
+
+% calculate the regretion term
+sqTheta=theta.^2;
+sqTheta(1)=0;
+sqReg=sum(sqTheta);
+
+% caclulate regularized cost
+J=(1/(2*m))*(sqDiff+lambda*sqReg);
 
 
-
-
-
-
-
-
+% calculate the gradient
+theta_=[0;theta(2:end)];
+grad=(1/m)*(X'*(h-y)+lambda*theta_);
 
 
 
